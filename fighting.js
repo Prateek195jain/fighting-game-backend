@@ -7,6 +7,7 @@ class Player {
   }
 }
 
+// calculating dice number between 1-6
 function rollDice() {
   return Math.floor(Math.random() * 6) + 1;
 }
@@ -15,9 +16,11 @@ function performAttack(attacker, defender) {
   const attackDiceRoll = rollDice();
   const defenseDiceRoll = rollDice();
 
+  // calculating Damage done by the attacker
   const attackDamage = attackDiceRoll * attacker.attack;
   const defenseDamage = defenseDiceRoll * defender.strength;
 
+  // This ensure that damageTaken by defender is always positive
   const damageTaken = Math.max(0, attackDamage - defenseDamage);
   defender.health -= damageTaken;
 
@@ -42,6 +45,7 @@ function startMatch(playerA, playerB) {
       }
     }
 
+    // It checks if player B is still in game
     if (playerB.health > 0) {
       performAttack(playerB, playerA);
       if (playerA.health <= 0) {
